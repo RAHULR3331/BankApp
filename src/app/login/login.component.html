@@ -17,10 +17,10 @@
         <h1 class="text-info  text-center">My Bank</h1>
          <!-- String interpolation -->
         <h6>{{aim}}</h6>
-        <input #acno id="acnoo" type="text" [placeholder]='account'><br><br>
-        <input #pswd id="pswdd" type="text" placeholder="password"><br><br>
+        <input [(ngModel)]="acno" id="acnoo" type="text" [placeholder]='account'><br><br>
+        <input [(ngModel)]="pswd" type="text" placeholder="password"><br><br>
   
-        <button   id="login" class="btn btn-primary" type="submit" (click)="login(acno,pswd)">Login</button><br>
+        <button   id="login" class="btn btn-primary" type="submit" (click)="login()">Login</button><br>
         <a href="signup.html">Register</a>
   
       </div>

@@ -48,6 +48,8 @@ export class LoginComponent implements OnInit { //3rd execute
     console.log(this.pswd)
   }
 
+  // ---------- b)Event Binding using $ event - (event_name)="event_name($event)"-----------
+
   // login() {
   //   // alert('login clicked');
   //   var acno=this.acno;
@@ -66,10 +68,30 @@ export class LoginComponent implements OnInit { //3rd execute
   //   }
   // }
 
-  login(a:any,p:any) {
+          // --------event variable using template referencing variable-------
+
+  // login(a:any,p:any) {
+  //   // alert('login clicked');
+  //   var acno=a.value;
+  //   var pswd=p.value;
+  //   var userDetails=this.userDetails
+  //   if(acno in userDetails){
+  //     if(pswd==userDetails[acno]['password']){
+  //       alert("login successfull")
+  //     }
+  //     else{
+  //       alert("incorrect password")
+  //     }
+  //   }
+  //   else{
+  //     alert("invalid account number")
+  //   }
+  // }
+
+    login() {
     // alert('login clicked');
-    var acno=a.value;
-    var pswd=p.value;
+    var acno=this.acno;
+    var pswd=this.pswd;
     var userDetails=this.userDetails
     if(acno in userDetails){
       if(pswd==userDetails[acno]['password']){

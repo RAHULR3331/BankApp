@@ -32,3 +32,17 @@ data sharing only one direction
 
 2)Two way Data Binding 
 data sharing in both direction  (ts->html,,html->ts)
+
+    i)ngModel Binding - import formsModule in app.module.ts
+
+        [(ngModel)]="property_name"
+
+-----Angular Routing----- 
+To set path for Component
+{
+    path:value,component:component_name
+},
+login()
+{
+    path:'',Component:LoginComponent
+},

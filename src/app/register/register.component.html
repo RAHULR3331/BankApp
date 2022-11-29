@@ -11,17 +11,20 @@
         </a>
       </div>
     </nav>
-    
+     <form [formGroup]="registerForm">
       <div class="page">
         <h2 class="" id="">My Bank</h2>
-        <input id="uname" type="text" placeholder="Username"><br><br>
-        <input id="acno" type="text" placeholder="Account number"><br><br>
-        <input id="pswd" type="text" placeholder="password"><br><br>
-        <button id="register" class="btn btn-primary" type="submit" onclick="register()">register</button><br>
-        <a href="login.html">Login</a>
+        <input formControlName="uname" id="uname" type="text" placeholder="Username"><br><br>
+        <input formControlName="acno" id="acno" type="text" placeholder="Account number"><br><br>
+        <input formControlName="pswd" id="pswd" type="password" placeholder="password"><br><br>
+        <button id="register" class="btn btn-primary" type="submit" (click)="register()">register</button><br>
+        <a routerLink="">Login</a>
+      
 
       </div>
+    </form>
   </div>
+
   
   <!-- Footer -->
   <footer class="text-center text-lg-start bg-white text-muted">

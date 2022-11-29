@@ -1,4 +1,4 @@
-                                    ANGULAR 
+----------------------------ANGULAR------------------------------------
      
 Basic Building Blocks 
 1) module -- to import 3rd party modules(root module - app.module.ts)
@@ -19,7 +19,7 @@ share data between components
 ts->component
 html->view
 
-1)one way Data Binding
+1))one way Data Binding
 data sharing only one direction
         1.1)components to view (ts->html)
             a)String interpolation - {{Expression}}
@@ -30,7 +30,7 @@ data sharing only one direction
             b)Event Binding using $ event - (event_name)="event_name($event)"
             c)event variable using template referencing variable - #variable_name
 
-2)Two way Data Binding 
+2))Two way Data Binding 
 data sharing in both direction  (ts->html,,html->ts)
 
     i)ngModel Binding - import formsModule in app.module.ts
@@ -39,10 +39,45 @@ data sharing in both direction  (ts->html,,html->ts)
 
 -----Angular Routing----- 
 To set path for Component
-{
-    path:value,component:component_name
-},
-login()
-{
-    path:'',Component:LoginComponent
-},
+
+            {
+                path:value,component:component_name
+            },
+
+
+            login()
+            {
+                path:'',Component:LoginComponent
+            },
+
+3))Angular services
+
+To hold redundant data 
+
+To create  new services - ng g s service_name
+
+4))Dependancy injection
+
+To share data between two dependant classes
+
+        constructor(private ds:Dataservice)
+
+
+5)) Angular Directives To manipulate DOM
+
+    a)component directives
+    b)Structural directives
+        -> *ngfor
+
+6)) Angular Forms
+
+    a)Template driven forms(first design the html template) 
+
+    b)Model driven forms(first design modell in html in td file)
+        1)Reactive forms
+            form group ,array,control
+            for advanced validation 
+            import from reactive form modules(in app.module.ts)
+
+
+

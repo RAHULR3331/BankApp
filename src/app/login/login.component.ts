@@ -2,6 +2,8 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataService } from '../service/data.service';
 
 @Component({
   selector: 'app-login',
@@ -17,17 +19,12 @@ export class LoginComponent implements OnInit { //3rd execute
   acno=""
   pswd=""
 
-  //database
-  userDetails:any={
-    1000:{acno:1000,username:"rahul",password:1000,balance:1000},
-    1001:{acno:1001,username:"rahul",password:1001,balance:10001},
-    1002:{acno:1002,username:"rahul",password:1002,balance:100002},
-    1003:{acno:1003,username:"rahul",password:1003,balance:1000003}
-  }
+  
 
   //function/methods - user defined functions  //4th execute
+// //dependancy injection
 
-  constructor() { // 1st execute
+  constructor( private ds:DataService , private router:Router) { // 1st execute
     //it automatically invokes when the object is created
     //object initialization
   }
@@ -47,7 +44,21 @@ export class LoginComponent implements OnInit { //3rd execute
     this.pswd=event.target.value;  
     console.log(this.pswd)
   }
+  login(){
+    var acno=this.acno;
+    var pswd=this.pswd;
+    // var userDetails=this.ds.userDetails;
+    var result= this.ds.login(acno,pswd)
+    if(result){
+      // alert('login successful')
+      this.router.navigateByUrl('dashboard')
 
+    }
+    else{
+      alert('login failed')
+    }
+  }
+}
   // ---------- b)Event Binding using $ event - (event_name)="event_name($event)"-----------
 
   // login() {
@@ -88,22 +99,23 @@ export class LoginComponent implements OnInit { //3rd execute
   //   }
   // }
 
-    login() {
-    // alert('login clicked');
-    var acno=this.acno;
-    var pswd=this.pswd;
-    var userDetails=this.userDetails
-    if(acno in userDetails){
-      if(pswd==userDetails[acno]['password']){
-        alert("login successfull")
-      }
-      else{
-        alert("incorrect password")
-      }
-    }
-    else{
-      alert("invalid account number")
-    }
-  }
+  //   login() {
+  //   // alert('login clicked');
+  //   var acno=this.acno;
+  //   var pswd=this.pswd;
+  //   var userDetails=this.ds.userDetails
+  //   if(acno in userDetails){
+  //     if(pswd==userDetails[acno]['password']){
+  //       alert("login successfull");
+  //       this.router.navigateByUrl('dashboard')
+  //     }
+  //     else{
+  //       alert("incorrect password")
+  //     }
+  //   }
+  //   else{
+  //     alert("invalid account number")
+  //   }
+  // }
 
-}
+

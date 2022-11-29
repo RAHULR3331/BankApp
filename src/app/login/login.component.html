@@ -18,10 +18,10 @@
          <!-- String interpolation -->
         <h6>{{aim}}</h6>
         <input [(ngModel)]="acno" id="acnoo" type="text" [placeholder]='account'><br><br>
-        <input [(ngModel)]="pswd" type="text" placeholder="password"><br><br>
+        <input [(ngModel)]="pswd" type="password" placeholder="password"><br><br>
   
-        <button   id="login" class="btn btn-primary" type="submit" (click)="login()">Login</button><br>
-        <a href="signup.html">Register</a>
+        <button   id="login" class="btn btn-primary" type="password" (click)="login()">Login</button><br>
+        <a routerLink="register">Register</a>
   
       </div>
     </div>

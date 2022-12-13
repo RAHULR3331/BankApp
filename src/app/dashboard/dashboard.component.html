@@ -1,36 +1,58 @@
+
+<button class="btn btn-warning" style="float: right;" (click)="logout()">Logout</button>
+<button class="btn btn-danger" style="float: right;" (click)="delete()">Delete</button>
+
 <div class="parent">
   <div>
     <h2>Welcome {{user}}</h2>
-    <a routerLink="/transaction">Transaction History</a>
+  
   </div>
-    <div class="child">
-        <div class="cc">
-            
-              <div class="page">
-                <h2 class="" id="">Deposite</h2>
-                
-                <input [(ngModel)]="acno" id="depo_acno" type="text" placeholder="Account number"><br><br>
-                <input [(ngModel)]="pswd" id="depo_pswd" type="text" placeholder="password"><br><br>
-                <input [(ngModel)]="amount" id="depo_amount" type="text" placeholder="Enter amount"><br><br>
-                <button id="deposite" class="btn btn-primary" type="submit" (click)="deposite()">deposite</button><br>
-                <!-- <a routerLink="">Login</a> -->
-        
-              </div>
-          </div>
+
+  <!-- date and Time -->
+  <h6>Date and Time :{{sdate | date:'short'}}</h6>
+    <!-- child selector -->
+  <app-delete [item]='acno' (onCancel)="onCancel()"></app-delete>
+
+  <div class="child"[ngClass]="acno? 'style1':''">
+    <div class="cc">
+          <!-- Deposite -->
+      <div class="page">
+        <h2 [formGroup]="depositeForm">Deposite</h2>
+        <form action="">
+          <p *ngIf="this.depositeForm.get('acno')?.errors && this.depositeForm.get('acno')?.touched" style="color: red;">Invalid Account Number</p>
+          <input formControlName="acno" id="depo_acno" type="text" placeholder="Account number"><br><br>
+          <p *ngIf="this.depositeForm.get('pswd')?.errors && this.depositeForm.get('pswd')?.touched" style="color: red;">Invalid password</p>
+          <input formControlName="pswd" id="depo_pswd" type="password" placeholder="password"><br><br>  
+          <p *ngIf="this.depositeForm.get('amount')?.errors && this.depositeForm.get('amount')?.touched" style="color: red;">Invalid amount</p>
+          <input formControlName="amount" id="depo_amount" type="text" placeholder="Enter amount"><br><br>
+          <button id="deposite" class="btn btn-primary" type="submit" (click)="deposite()">Deposite</button><br>
+          
+        </form>
+      </div>
     </div>
-    <div class="child">
-        <div class="cc">
-            
-            <div class="page">
-              <h2 class="" id="">withdraw</h2>
-              
-              <input [(ngModel)]="acno1" id="with_acno" type="text" placeholder="Account number"><br><br>
-              <input [(ngModel)]="pswd1" id="with_pswd" type="text" placeholder="password"><br><br>
-              <input [(ngModel)]="amount1" id="with_amount" type="text" placeholder="Enter amount"><br><br>
-              <button id="withdraw" class="btn btn-primary" type="submit" (click)="withdraw()">withdraw</button><br>
-              <!-- <a routerLink="">Login</a> -->
-      
-            </div>
-        </div>
+  </div>
+  <div class="child" >
+    <div class="cc">
+
+      <!-- Withdraw -->
+      <div class="page"[ngClass]="acno? 'style1':''">
+        <h2 class="" id="">withdraw</h2>
+
+        <form [formGroup]="withdrawForm">
+        <p *ngIf="this.withdrawForm.get('acno1')?.errors && this.withdrawForm.get('acno1')?.touched" style="color: red;">Invalid Account Number</p>
+        <input formControlName="acno1" id="with_acno" type="text" placeholder="Account number"><br><br>
+        <p *ngIf="this.withdrawForm.get('pswd1')?.errors && this.withdrawForm.get('pswd1')?.touched" style="color: red;">Invalid password</p>
+        <input formControlName="pswd1" id="with_pswd" type="password" placeholder="password"><br><br>
+        <p *ngIf="this.withdrawForm.get('amount1')?.errors && this.withdrawForm.get('amount1')?.touched" style="color: red;">Invalid amount</p>
+        <input formControlName="amount1" id="with_amount" type="text" placeholder="Enter amount"><br><br>
+        <button id="withdraw" class="btn btn-primary" type="submit" (click)="withdraw()">Withdraw</button><br>
+        <!-- <a routerLink="">Login</a> -->
+      </form>
+
+      </div>
     </div>
+  </div>
+  <button class="btn btn-secondary" style="float:right"><a routerLink="/transaction">Transaction History</a></button>
+  
 </div>
+<a routerLink="">Login</a>

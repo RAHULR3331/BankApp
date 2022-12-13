@@ -15,7 +15,31 @@ export class DataService {
   //to hold transaction details
   // transaction="";
 
-  constructor() {}
+  constructor() {
+    this.getDetails();
+  }
+  //saveDetalis -to save details in local storage 
+  saveDetails(){
+    //DataBase
+    localStorage.setItem('DataBase',JSON.stringify(this.userDetails))
+    //CurrentUser 
+    localStorage.setItem('currentUser',JSON.stringify(this.currentUser))
+    //CurrentAcno
+    localStorage.setItem('currentAcno',JSON.stringify(this.currentAcno))
+  }
+
+  //getDetails
+  getDetails(){
+    if(localStorage.getItem('DataBase')){
+      this.userDetails=JSON.parse(localStorage.getItem('DataBase') || '')
+    }
+    if(localStorage.getItem('currentUser')){
+      this.currentUser=JSON.parse(localStorage.getItem('currentUser') || '')
+    }
+    if(localStorage.getItem('currentAcno')){
+      this.currentAcno=JSON.parse(localStorage.getItem('currentAcno') || '')
+    }
+  }
   //database
   userDetails: any = {
     1000: {
@@ -60,6 +84,7 @@ export class DataService {
         balance: 0,
         transaction: []
       }
+      this.saveDetails();
       console.log(userDetails);
       return true;
 
@@ -72,7 +97,9 @@ export class DataService {
       if (pswd == userDetails[acno]['password']) {
         this.currentUser = userDetails[acno]['username'];
         this.currentAcno=acno;
+        this.saveDetails();
         return true;
+        
       } else {
         return false;
 
@@ -94,6 +121,7 @@ export class DataService {
           Amount: amount
 
         })
+        this.saveDetails();
         console.log(userDetails)
         // return userDetails[acno]['balance'];
        return userDetails[acno]["balance"]
@@ -118,6 +146,7 @@ export class DataService {
             Type: 'debit',
             Amount: amount
           })
+          this.saveDetails();
           console.log(userDetails)
           return userDetails[acno]['balance'];
         } else {

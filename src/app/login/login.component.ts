@@ -2,6 +2,7 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../service/data.service';
 
@@ -19,12 +20,19 @@ export class LoginComponent implements OnInit { //3rd execute
   acno=""
   pswd=""
 
+  //login model
+  loginForm = this.fb.group({
+    acno: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+    pswd: ['', [Validators.required, Validators.pattern('[a-z A-Z 0-9 !@#]*')]]
+  })
+  
+
   
 
   //function/methods - user defined functions  //4th execute
 // //dependancy injection
 
-  constructor( private ds:DataService , private router:Router) { // 1st execute
+  constructor( private ds:DataService , private router:Router, private fb:FormBuilder) { // 1st execute
     //it automatically invokes when the object is created
     //object initialization
   }
@@ -45,8 +53,9 @@ export class LoginComponent implements OnInit { //3rd execute
     console.log(this.pswd)
   }
   login(){
-    var acno=this.acno;
-    var pswd=this.pswd;
+    var acno=this.loginForm.value.acno;
+    var pswd=this.loginForm.value.pswd;
+
     // var userDetails=this.ds.userDetails;
     var result= this.ds.login(acno,pswd)
     if(result){

@@ -79,5 +79,22 @@ To share data between two dependant classes
             for advanced validation 
             import from reactive form modules(in app.module.ts)
 
+7))Loccal Storage
+    -setitem - to set data in local Storage
+    -getitem - to get data from local Storage
+    -removeitem - to remove data from local Storage
+
+8))Parent Child communication
+
+    parent -> child communication
+    child -> parent communication
+
+    eg:-
+    dashboard -> parent
+    delete -> child
+
+9)) Angular pipes
+
+
 
 

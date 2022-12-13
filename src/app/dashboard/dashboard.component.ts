@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from '../service/data.service';
 
 @Component({
@@ -8,27 +10,43 @@ import { DataService } from '../service/data.service';
 })
 export class DashboardComponent implements OnInit {
 user='';
-  constructor(private ds:DataService) {
+//deposite model
+depositeForm = this.fb.group({
+  pswd: ['', [Validators.required, Validators.pattern('[a-z A-Z 0-9]*')]],
+  acno: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+  amount: ['', [Validators.required, Validators.pattern('[0-9]*')]]
+})
+
+//withdraw model
+withdrawForm = this.fb.group({
+  pswd1: ['', [Validators.required, Validators.pattern('[a-z A-Z 0-9]*')]],
+  acno1: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+  amount1: ['', [Validators.required, Validators.pattern('[0-9]*')]]
+})
+  constructor(private ds:DataService, private fb:FormBuilder,private router:Router) {
 this.user=this.ds.currentUser
+this.sdate= new Date;
   }
 
   ngOnInit(): void {
+    if(!localStorage.getItem('currentAcno')){
+      alert("please login First")
+      this.router.navigateByUrl('');
+    }
   }
+
+  //DEPOSITE
   acno='';
   pswd='';
   amount='';
 
-  acno1='';
-  pswd1='';
-  amount1="";
-
-
-
   deposite(){
-    var acno=this.acno;
-    var pswd=this.pswd;
-    var amount=this.amount;
+
+    var acno=this.depositeForm.value.acno;
+    var pswd=this.depositeForm.value.pswd;
+    var amount=this.depositeForm.value.amount;
      const result=this.ds.deposite(acno,pswd,amount)
+
       if(result){
         alert(`${amount} is credited... available balance is ${result}`)
 
@@ -36,15 +54,19 @@ this.user=this.ds.currentUser
       
 
      }
-    // alert('deposite clicked')
+    
+     //WITHDRAW
+    acno1='';
+    pswd1='';
+    amount1="";
   
   withdraw(){
-    var acno1=this.acno1;
-    var pswd1=this.pswd1;
-    var amount1=this.amount1;
-     const result1=this.ds.withdraw(acno1,pswd1,amount1)
-      if(result1){
-        alert(`${amount1} is debited... available balance is ${result1}`)
+    var acno=this.withdrawForm.value.acno1;
+    var pswd=this.withdrawForm.value.pswd1;
+    var amount=this.withdrawForm.value.amount1;
+     const result=this.ds.withdraw(acno,pswd,amount)
+      if(result){
+        alert(`${amount} is debited... available balance is ${result}`)
 
       }
       else{
@@ -53,10 +75,23 @@ this.user=this.ds.currentUser
 
      }
     // alert('withdaw clicked')
+
+    logout(){
+      // alert('clicked')
+      //remove currentacno and currentuser from localstorage
+      localStorage.removeItem('currentAcno');
+      localStorage.removeItem('currentUser');
+      this.router.navigateByUrl('');
+    }
+    delete(){
+      // alert('delete')
+      this.acno=JSON.parse(localStorage.getItem('currentAcno')||'')
+    }
+    onCancel(){
+      this.acno="";
+    }
+    //current date and time
+    sdate:any;
   }
-
-
-
-
 
 

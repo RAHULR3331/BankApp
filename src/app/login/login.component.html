@@ -17,11 +17,15 @@
         <h1 class="text-info  text-center">My Bank</h1>
          <!-- String interpolation -->
         <h6>{{aim}}</h6>
-        <input [(ngModel)]="acno" id="acnoo" type="text" [placeholder]='account'><br><br>
-        <input [(ngModel)]="pswd" type="password" placeholder="password"><br><br>
+        <form [formGroup]="loginForm">
+        <p *ngIf="this.loginForm.get('acno')?.errors && this.loginForm.get('acno')?.touched" style="color: red;">Invalid Account Number</p>
+        <input formControlName="acno" id="acnoo" type="text" [placeholder]='account'><br><br>
+        <p *ngIf="this.loginForm.get('pswd')?.errors && this.loginForm.get('pswd')?.touched" style="color: red;">Invalid password</p>
+        <input formControlName="pswd" type="password" placeholder="password"><br><br>
   
         <button   id="login" class="btn btn-primary" type="password" (click)="login()">Login</button><br>
         <a routerLink="register">Register</a>
+      </form>
   
       </div>
     </div>

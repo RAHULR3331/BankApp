@@ -10,7 +10,7 @@ export class DataService {
 
   currentUser = '';
   //to hold account number
-  currentAcno="";
+  currentAcno = "";
 
   //to hold transaction details
   // transaction="";
@@ -19,25 +19,31 @@ export class DataService {
     this.getDetails();
   }
   //saveDetalis -to save details in local storage 
-  saveDetails(){
+  saveDetails() {
     //DataBase
-    localStorage.setItem('DataBase',JSON.stringify(this.userDetails))
+    if (this.userDetails) {
+      localStorage.setItem('DataBase', JSON.stringify(this.userDetails))
+    }
     //CurrentUser 
-    localStorage.setItem('currentUser',JSON.stringify(this.currentUser))
+    if (this.currentUser) {
+      localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
+    }
     //CurrentAcno
-    localStorage.setItem('currentAcno',JSON.stringify(this.currentAcno))
+    if (this.currentAcno) {
+      localStorage.setItem('currentAcno', JSON.stringify(this.currentAcno))
+    }
   }
 
   //getDetails
-  getDetails(){
-    if(localStorage.getItem('DataBase')){
-      this.userDetails=JSON.parse(localStorage.getItem('DataBase') || '')
+  getDetails() {
+    if (localStorage.getItem('DataBase')) {
+      this.userDetails = JSON.parse(localStorage.getItem('DataBase') || '')
     }
-    if(localStorage.getItem('currentUser')){
-      this.currentUser=JSON.parse(localStorage.getItem('currentUser') || '')
+    if (localStorage.getItem('currentUser')) {
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '')
     }
-    if(localStorage.getItem('currentAcno')){
-      this.currentAcno=JSON.parse(localStorage.getItem('currentAcno') || '')
+    if (localStorage.getItem('currentAcno')) {
+      this.currentAcno = JSON.parse(localStorage.getItem('currentAcno') || '')
     }
   }
   //database
@@ -96,10 +102,10 @@ export class DataService {
     if (acno in userDetails) {
       if (pswd == userDetails[acno]['password']) {
         this.currentUser = userDetails[acno]['username'];
-        this.currentAcno=acno;
+        this.currentAcno = acno;
         this.saveDetails();
         return true;
-        
+
       } else {
         return false;
 
@@ -124,7 +130,7 @@ export class DataService {
         this.saveDetails();
         console.log(userDetails)
         // return userDetails[acno]['balance'];
-       return userDetails[acno]["balance"]
+        return userDetails[acno]["balance"]
 
       } else {
         return false;
@@ -162,7 +168,7 @@ export class DataService {
 
   }
 
-  getTransaction(acno:any){
+  getTransaction(acno: any) {
     return this.userDetails[acno]['transaction'];
   }
 

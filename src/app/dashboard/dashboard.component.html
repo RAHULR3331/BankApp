@@ -13,12 +13,12 @@
     <!-- child selector -->
   <app-delete [item]='acno' (onCancel)="onCancel()"></app-delete>
 
-  <div class="child"[ngClass]="acno? 'style1':''">
+  <div class="child" [ngClass]="acno? 'style1':''">
     <div class="cc">
           <!-- Deposite -->
       <div class="page">
-        <h2 [formGroup]="depositeForm">Deposite</h2>
-        <form action="">
+        <h2 >Deposite</h2>
+        <form [formGroup]="depositeForm">
           <p *ngIf="this.depositeForm.get('acno')?.errors && this.depositeForm.get('acno')?.touched" style="color: red;">Invalid Account Number</p>
           <input formControlName="acno" id="depo_acno" type="text" placeholder="Account number"><br><br>
           <p *ngIf="this.depositeForm.get('pswd')?.errors && this.depositeForm.get('pswd')?.touched" style="color: red;">Invalid password</p>

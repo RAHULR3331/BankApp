@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import {
   Injectable,
   Type
@@ -11,11 +12,13 @@ export class DataService {
   currentUser = '';
   //to hold account number
   currentAcno = "";
+  
+  
 
   //to hold transaction details
   // transaction="";
 
-  constructor() {
+  constructor(private http:HttpClient) {
     this.getDetails();
   }
   //saveDetalis -to save details in local storage 
@@ -78,24 +81,35 @@ export class DataService {
     }
   }
 
-  register(acno: any, username: any, password: any) {
-    let userDetails = this.userDetails;
-    if (acno in userDetails) {
-      return false;
-    } else {
-      userDetails[acno] = {
-        acno,
-        username,
-        password,
-        balance: 0,
-        transaction: []
-      }
-      this.saveDetails();
-      console.log(userDetails);
-      return true;
+  register(acno: any, username: any, pswd: any){
+const data={
+  acno,
+  pswd,
+  username
+}
+return this.http.post('http://localhost:3000/register',data)
 
-    }
   }
+
+
+
+  //   let userDetails = this.userDetails;
+  //   if (acno in userDetails) {
+  //     return false;
+  //   } else {
+  //     userDetails[acno] = {
+  //       acno,
+  //       username,
+  //       password,
+  //       balance: 0,
+  //       transaction: []
+  //     }
+  //     this.saveDetails();
+  //     console.log(userDetails);
+  //     return true;
+
+  //   }
+  // }
 
   login(acno: any, pswd: any) {
     let userDetails = this.userDetails;

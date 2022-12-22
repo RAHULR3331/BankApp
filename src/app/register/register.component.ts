@@ -24,9 +24,7 @@ export class RegisterComponent implements OnInit {
   pswd = "";
 
 
-
-
-  constructor(private fb: FormBuilder, private ds: DataService, private route: Router) {}
+  constructor(private fb: FormBuilder, private ds: DataService, private router: Router) {}
   //Registration model
   registerForm = this.fb.group({
     uname: ['', [Validators.required, Validators.pattern('[a-z A-Z]*')]],
@@ -41,26 +39,21 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerForm);
 
     //alert("register clicked")
-    console.log(this.registerForm.get('uname')?.errors);
-
-
+  
     var uname = this.registerForm.value.uname;
     var acno = this.registerForm.value.acno;
     var pswd = this.registerForm.value.pswd;
     if (this.registerForm.valid) {
 
-      const result = this.ds.register(acno, uname, pswd)
-      if (result) {
-        alert("Register successfull")
-        this.route.navigateByUrl('')
-      } else {
-        alert('Account already registered')
-        this.route.navigateByUrl('register')
-      }
+      console.log(this.registerForm.get('uname')?.errors)
+      this.ds.register(acno,uname,pswd)
+      .subscribe((result:any)=>{
+        alert(result.message);
+        this.router.navigateByUrl('')
+      })
 
-    } else {
-      alert('invalid form')
-    }
-
+  }else{
+    alert('Invalid Form')
   }
+}
 }

@@ -29,10 +29,10 @@ this.sdate= new Date;
   }
 
   ngOnInit(): void {
-    if(!localStorage.getItem('currentAcno')){
-      alert("please login First")
-      this.router.navigateByUrl('');
-    }
+    // if(!localStorage.getItem('currentAcno')){
+    //   alert("please login First")
+    //   this.router.navigateByUrl('');
+    // }
   }
 
   //DEPOSITE

@@ -1,4 +1,5 @@
 import {
+  assertPlatform,
   Component,
   OnInit
 } from '@angular/core';
@@ -56,15 +57,15 @@ export class LoginComponent implements OnInit { //3rd execute
     var acno=this.loginForm.value.acno;
     var pswd=this.loginForm.value.pswd;
 
-    // var userDetails=this.ds.userDetails;
-    var result= this.ds.login(acno,pswd)
-    if(result){
-      // alert('login successful')
-      this.router.navigateByUrl('dashboard')
-
-    }
-    else{
-      alert('login failed')
+    if(this.loginForm.valid){
+      this.ds.login(acno,pswd)
+      .subscribe((result:any)=>{
+        alert(result.message);
+        this.router.navigateByUrl('dashboard')
+      },
+      result=>{
+        alert(result.error.message)
+      })
     }
   }
 }

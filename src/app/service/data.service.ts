@@ -112,21 +112,28 @@ return this.http.post('http://localhost:3000/register',data)
   // }
 
   login(acno: any, pswd: any) {
-    let userDetails = this.userDetails;
-    if (acno in userDetails) {
-      if (pswd == userDetails[acno]['password']) {
-        this.currentUser = userDetails[acno]['username'];
-        this.currentAcno = acno;
-        this.saveDetails();
-        return true;
-
-      } else {
-        return false;
-
-      }
-    } else {
-      return false;
+    const data={
+      acno,
+      pswd
     }
+
+    return this.http.post('http://localhost:3000/login',data)
+
+    // let userDetails = this.userDetails;
+    // if (acno in userDetails) {
+    //   if (pswd == userDetails[acno]['password']) {
+    //     this.currentUser = userDetails[acno]['username'];
+    //     this.currentAcno = acno;
+    //     this.saveDetails();
+    //     return true;
+
+    //   } else {
+    //     return false;
+
+    //   }
+    // } else {
+    //   return false;
+    // }
   }
 
   deposite(acno: any, pswd: any, amt: any) {

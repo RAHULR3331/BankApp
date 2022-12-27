@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
       })
 
   }else{
-    alert('Invalid Form')
+    alert('Invalid data')
   }
 }
 }

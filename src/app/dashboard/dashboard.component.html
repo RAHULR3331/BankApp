@@ -2,16 +2,19 @@
 <button class="btn btn-warning" style="float: right;" (click)="logout()">Logout</button>
 <button class="btn btn-danger" style="float: right;" (click)="delete()">Delete</button>
 
+
 <div class="parent">
   <div>
-    <h2>Welcome {{user}}</h2>
+    <h2 class="wel">Welcome {{user}}</h2>
   
   </div>
-
+  <div>
+    <button type="button" id="trans"class="btn btn-secondary" style="float:right"><a routerLink="/transaction">Transaction History</a></button>
+  </div>
   <!-- date and Time -->
-  <h6>Date and Time :{{sdate | date:'short'}}</h6>
+  <h6 class="time">Date and Time :{{sdate | date:'short'}}</h6>
     <!-- child selector -->
-  <app-delete [item]='acno' (onCancel)="onCancel()"></app-delete>
+  <app-delete [item]='acno' (onCancel)="onCancel()" (onDelete)="onDelete($event)"></app-delete>
 
   <div class="child" [ngClass]="acno? 'style1':''">
     <div class="cc">
@@ -48,11 +51,12 @@
         <button id="withdraw" class="btn btn-primary" type="submit" (click)="withdraw()">Withdraw</button><br>
         <!-- <a routerLink="">Login</a> -->
       </form>
+      
 
       </div>
+      
     </div>
+    
   </div>
-  <button class="btn btn-secondary" style="float:right"><a routerLink="/transaction">Transaction History</a></button>
-  
+
 </div>
-<a routerLink="">Login</a>

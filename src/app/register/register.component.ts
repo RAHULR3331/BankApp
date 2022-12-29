@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   //Registration model
   registerForm = this.fb.group({
     uname: ['', [Validators.required, Validators.pattern('[a-z A-Z]*')]],
-    acno: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+    acno: ['', [Validators.required, Validators.pattern('[0-9 ]*')]],
     pswd: ['', [Validators.required, Validators.pattern('[a-z A-Z 0-9 !@#]*')]]
   })
 
@@ -50,10 +50,11 @@ export class RegisterComponent implements OnInit {
       .subscribe((result:any)=>{
         alert(result.message);
         this.router.navigateByUrl('')
+      },
+      result=>{
+        alert(result.error.message);
       })
 
-  }else{
-    alert('Invalid data')
   }
 }
 }

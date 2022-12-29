@@ -1,6 +1,5 @@
-.body1 {
-    background-color: rgb(215, 188, 154);
-    
+body{
+    background-image: ('https://i.postimg.cc/c1331Gx8/Bnak.jpg');
 }
 
 .page {
@@ -24,9 +23,9 @@ img {
 }
 #bb{
     padding-bottom: 20%;
-    background-image: url(https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000);
     
-}
+        background-image: ('https://i.postimg.cc/c1331Gx8/Bnak.jpg');
+    }
 #cc{
     padding-bottom: 20%;
     background-image: url(https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000);

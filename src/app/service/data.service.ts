@@ -229,4 +229,9 @@ return this.http.post('http://localhost:3000/register',data)
     return this.http.post('http://localhost:3000/transaction',data,this.getToken())
   }
 
+  //Delete
+  deleteAcc(acno: any) {
+    return this.http.delete('http://localhost:3000/deleteAcc/'+acno)
+  }
+
 }

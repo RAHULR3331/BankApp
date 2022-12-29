@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../service/data.service';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  DataService
+} from '../service/data.service';
 
 @Component({
   selector: 'app-transaction',
@@ -7,23 +12,22 @@ import { DataService } from '../service/data.service';
   styleUrls: ['./transaction.component.css']
 })
 export class TransactionComponent implements OnInit {
-  acno:any;//to hold acccount number
-  transaction:any;//to hold transaction details
+  acno: any; //to hold acccount number
+  transaction: any; //to hold transaction details
 
-  constructor( private ds:DataService) {
-    
-    this.acno=JSON.parse(localStorage.getItem('currentAcno')||'');
+  constructor(private ds: DataService) {
+
+    this.acno = JSON.parse(localStorage.getItem('currentAcno') || '');
     this.ds.getTransaction(this.acno)
-    .subscribe((result:any)=>{
-      this.transaction=result.transaction
-    },
-    result=>{
-      alert(result.error.message)
-    })
-    
+      .subscribe((result: any) => {
+          this.transaction = result.transaction
+        },
+        result => {
+          alert(result.error.message)
+        })
+
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

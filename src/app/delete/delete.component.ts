@@ -17,6 +17,8 @@ export class DeleteComponent implements OnInit {
 
   //onCancel -user defined event
   @Output() onCancel = new EventEmitter();
+  //
+  @Output() onDelete = new EventEmitter();
 
 
   constructor() {}
@@ -26,6 +28,10 @@ export class DeleteComponent implements OnInit {
   cancel() {
     this.onCancel.emit();
 
+  }
+  delete(){
+    // alert('clicked')
+    this.onDelete.emit(this.item)
   }
 
 }

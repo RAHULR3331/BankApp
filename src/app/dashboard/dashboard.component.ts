@@ -36,17 +36,20 @@ export class DashboardComponent implements OnInit {
   })
   constructor(private ds: DataService, private fb: FormBuilder, private router: Router) {
     // this.user = this.ds.currentUser
+    if(localStorage.getItem('currentUser')){
     this.user=JSON.parse(localStorage.getItem('currentUser')||'')
+    }
     this.sdate = new Date;
   }
 
   ngOnInit(): void {
-    // if(!localStorage.getItem('currentAcno')){
-    //   alert("please login First")
-    //   this.router.navigateByUrl('');
-    // }
-    this.user = JSON.parse(localStorage.getItem('currentUser') || '');
-    console.log(this.user)
+    if(!localStorage.getItem('currentUser')){
+      alert("please login First")
+      this.router.navigateByUrl('');
+    }
+
+    // this.user = JSON.parse(localStorage.getItem('currentUser') || '');
+    // console.log(this.user)
   }
 
   //DEPOSITE
@@ -112,4 +115,20 @@ export class DashboardComponent implements OnInit {
   }
   //current date and time
   sdate: any;
+
+  onDelete(event:any){
+    // alert(event)
+    this.ds.deleteAcc(event)
+    .subscribe((result:any)=>{
+      alert(result.message)
+      // this.router.navigateByUrl('');
+      this.logout();
+    },
+    result=>{
+      alert(result.error.message)
+
+    }
+    )
+
+  }
 }
